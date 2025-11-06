@@ -1,5 +1,7 @@
 package com.govind.blogging.blog.Security;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,27 +10,18 @@ import org.springframework.stereotype.Service;
 
 import com.govind.blogging.entities.User;
 import com.govind.blogging.repositories.UserRepo;
-import java.util.ArrayList;
 
 @Service
 public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
-    private UserRepo userRepository;
+    private UserRepo userRepo;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        User user = userRepository.findByEmail(email)
-//                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-    	
-    	User user = userRepository.findByEmail(email)
-    		    .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
-    	
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
 
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),   
-                user.getPassword(),
-                new ArrayList<>()
-        );
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
     }
 }

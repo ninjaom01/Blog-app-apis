@@ -28,24 +28,22 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<JwtAuthResponse> createToken(@RequestBody JwtAuthRequest request) {
+        authenticate(request.getUsername(), request.getPassword());
+
+        UserDetails userDetails = customUserDetailService.loadUserByUsername(request.getUsername());
+        String token = jwtTokenHelper.generateToken(userDetails);
+
+        JwtAuthResponse response = new JwtAuthResponse();
+        response.setToken(token);
+
+        return ResponseEntity.ok(response);
+    }
+
+    private void authenticate(String username, String password) {
         try {
-            // Authenticate username & password
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-
-            // Load user details
-            UserDetails userDetails = customUserDetailService.loadUserByUsername(request.getUsername());
-
-            // Generate token
-            String token = jwtTokenHelper.generateToken(userDetails);
-
-            // Return token
-            JwtAuthResponse response = new JwtAuthResponse();
-            response.setToken(token);
-            return ResponseEntity.ok(response);
-
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (BadCredentialsException e) {
-            throw new BadCredentialsException("Invalid username or password!");
+            throw new RuntimeException("Invalid username or password!");
         }
     }
 }

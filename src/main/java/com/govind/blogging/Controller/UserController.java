@@ -26,14 +26,22 @@ public class UserController {
 	
 	@Autowired
 	private UserService userservice;
-
-	//post-create user
+//
+//	//post-create user
+//	@PostMapping("/")
+//	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto)
+//	{
+//		UserDto cerateUserDto = this.userservice.createUser(userDto);
+//		return new ResponseEntity<>(cerateUserDto,HttpStatus.CREATED);	
+//	}
+	// at class: @RequestMapping("/api/users")
+	
 	@PostMapping("/")
-	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto)
-	{
-		UserDto cerateUserDto = this.userservice.createUser(userDto);
-		return new ResponseEntity<>(cerateUserDto,HttpStatus.CREATED);	
+	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
+	    UserDto created = userservice.createUser(userDto);
+	    return new ResponseEntity<>(created, HttpStatus.CREATED);
 	}
+
 	
 	//put - update user
 	@PutMapping("/{userId}")
