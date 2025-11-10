@@ -114,9 +114,9 @@ GET /api/users/
 
 For UI:
 
-[http://localhost:9090/swagger-ui/index.html] (http://localhost:9090/swagger-ui/index.html)
+(http://localhost:9090/swagger-ui/index.html)<br>
 For Documentation:
 
-[http://localhost:9090/v3/api-docs] (http://localhost:9090/v3/api-docs)
+(http://localhost:9090/v3/api-docs)
 
 
