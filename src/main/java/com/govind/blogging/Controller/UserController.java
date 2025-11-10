@@ -1,7 +1,6 @@
 package com.govind.blogging.Controller;
 
 import java.util.List;
-//import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,16 +25,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService userservice;
-//
-//	//post-create user
-//	@PostMapping("/")
-//	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto)
-//	{
-//		UserDto cerateUserDto = this.userservice.createUser(userDto);
-//		return new ResponseEntity<>(cerateUserDto,HttpStatus.CREATED);	
-//	}
-	// at class: @RequestMapping("/api/users")
-	
+
 	@PostMapping("/")
 	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
 	    UserDto created = userservice.createUser(userDto);
@@ -58,11 +48,11 @@ public class UserController {
 	    return new ResponseEntity<>(new ApiResponse("User_deleted Successfully", true), HttpStatus.OK);
 	}
 
+	
 	//Get = user get
     @GetMapping("/{UserId}")
 	public ResponseEntity<UserDto>getSingleUser(@PathVariable("UserId") Integer userId){
-		return ResponseEntity.ok(this.userservice.getUserById(userId));
-		
+		return ResponseEntity.ok(this.userservice.getUserById(userId));	
 	}
     
     // Get all users
@@ -70,7 +60,5 @@ public class UserController {
     public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok(this.userservice.getAllUsers());
     }
-
-
 	
 }

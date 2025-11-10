@@ -17,7 +17,7 @@ public class JwtTokenHelper {
 
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60; // 5 hours
 
-    private final SecretKey secretKey = Keys.hmacShaKeyFor("ThisIsASecretKeyForJwtTokenGenerationGovind123!".getBytes());
+    private final SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
     // Retrieve username from JWT token
     public String getUsernameFromToken(String token) {

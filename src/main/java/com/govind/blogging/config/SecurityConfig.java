@@ -27,20 +27,6 @@ public class SecurityConfig {
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
-
-	/*
-	 * @Bean public SecurityFilterChain securityFilterChain(HttpSecurity http)
-	 * throws Exception { http .csrf(csrf -> csrf.disable())
-	 * .authorizeHttpRequests(auth -> auth
-	 * .requestMatchers("/api/auth/**").permitAll() // Allow login/register
-	 * .anyRequest().authenticated() // Others need token ) .exceptionHandling(ex ->
-	 * ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))
-	 * .sessionManagement(sess ->
-	 * sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-	 * 
-	 * http.addFilterBefore(jwtAuthenticationFilter,
-	 * UsernamePasswordAuthenticationFilter.class); return http.build(); }
-	 */
  
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -49,24 +35,19 @@ public class SecurityConfig {
           .authorizeHttpRequests(auth -> auth
               .requestMatchers("/api/auth/**").permitAll()                 // login
               .requestMatchers(HttpMethod.POST, "/api/users/").permitAll() // registration (with trailing slash)
-              //.requestMatchers(HttpMethod.POST, "/api/users").permitAll()  // and without slash (just in case)
+              .requestMatchers("http://localhost:9090/swagger-ui/index.html").permitAll()
+              .requestMatchers("/v3/api-docs/**","/swagger-ui.html","/swagger-ui/**").permitAll()
               .anyRequest().authenticated()
+              
           )
           .exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))
           .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
-	/*
-	 * @Bean public PasswordEncoder passwordEncoder() { return new
-	 * BCryptPasswordEncoder(); }
-	 */
-//    
+    
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // TEMPORARY for plain-text passwords in DB
         return org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance();
     }
 

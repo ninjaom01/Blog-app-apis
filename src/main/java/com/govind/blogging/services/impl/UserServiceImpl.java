@@ -27,15 +27,7 @@ public class UserServiceImpl implements UserService {
 	  @Override public UserDto createUser(UserDto userDto) { User user =
 	  this.dtoToUser(userDto); User savedUser = this.UserRepo.save(user); return
 	  this.userToDto(savedUser); }
-	 
-
-	/*
-	 * @Autowired private PasswordEncoder passwordEncoder;
-	 * 
-	 * public UserDto createUser(UserDto dto) { User user = mapper.map(dto,
-	 * User.class); user.setPassword(passwordEncoder.encode(user.getPassword())); //
-	 * <-- add this return mapper.map(userRepo.save(user), UserDto.class); }
-	 */
+	
 
 	@Override
 	public UserDto updateUser(UserDto userDto, Integer userID) {
@@ -74,7 +66,6 @@ public class UserServiceImpl implements UserService {
 
 	private User dtoToUser(UserDto userDto) {
 		User user = this.modelMapper.map(userDto, User.class);
-
 //        user.setId(userDto.getId());
 //        user.setName(userDto.getName());
 //        user.setEmail(userDto.getEmail());
@@ -86,5 +77,8 @@ public class UserServiceImpl implements UserService {
 	private UserDto userToDto(User user) {
 		return this.modelMapper.map(user, UserDto.class);
 	}
+	
+	
+	
 
 }
