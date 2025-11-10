@@ -1,20 +1,20 @@
-📝 Project Overview
+ <H1> Project Overview </H1>
 
 Blogging App APIs is a Spring Boot-based backend application that powers a blogging and social media-style platform.
 It supports user authentication, post management (CRUD), categories, comments, and secure REST APIs using Spring Security with JWT.
 The entire API is documented with Swagger (OpenAPI 3) for easy testing.
 
-🚀 Features
+ <H1> Features </H1>
 
-✅ User Registration & Login (with JWT Authentication)
-✍️ Create, Update, Delete, and View Blog Posts
-🗂️ Category Management (assign posts to categories)
-💬 Comment System (add and delete comments)
-👥 User Roles (Admin/User) — role-based API access
-🔐 Spring Security + JWT for secure API access
-📘 Swagger API Documentation for testing and exploring endpoints
+ User Registration & Login (with JWT Authentication)
+ Create, Update, Delete, and View Blog Posts
+ Category Management (assign posts to categories)
+ Comment System (add and delete comments)
+ User Roles (Admin/User) — role-based API access
+ Spring Security + JWT for secure API access
+ Swagger API Documentation for testing and exploring endpoints
 
-⚙️ Tech Stack
+<H1> Tech Stack </H1>
 Technology	Description :
 Spring Boot 3.3.4	Core backend framework
 Spring Data JPA	ORM layer for MySQL
@@ -25,7 +25,8 @@ Swagger (Springdoc OpenAPI 2.6.0)	Interactive API documentation
 ModelMapper	DTO ↔ Entity mapping
 Lombok	Reduces boilerplate code
 Java 21	Programming language
-🛠️ How to Run the Project Locally
+<H1> How to Run the Project Locally </H1>
+
 1. Clone the Repository
 git clone [https://github.com/ninjaom01/Blogging-app.git](https://github.com/ninjaom01/Blogging-app.git)
 cd blogging-app
@@ -60,9 +61,9 @@ mvn spring-boot:run
 
 
 The app starts on:
-👉 http://localhost:9090
+ http://localhost:9090
 
-🔑 Authentication Guide
+ Authentication Guide
 1. Register User
 
 POST /api/auth/register
@@ -109,11 +110,13 @@ DELETE /api/posts/{id}
 
 GET /api/users/
 
-📘 Swagger API Documentation
+<H1> Swagger API Documentation</H1>
+
 For UI:
+
 [http://localhost:9090/swagger-ui/index.html] (http://localhost:9090/swagger-ui/index.html)
 For Documentation:
+
 [http://localhost:9090/v3/api-docs] (http://localhost:9090/v3/api-docs)
 
 
-This shows all available endpoints with request/response models.
